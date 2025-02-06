@@ -9,7 +9,7 @@
 	String mbti = request.getParameter("ie")+request.getParameter("sn")
 					+request.getParameter("tf")+request.getParameter("pj");
 	
-	out.print("당신의 MBTI는 " + mbti +  "입니다!");
+	out.print("당신의 MBTI는 " + mbti +  "입니다!" + "<br>");
 	
 	//.properties파일 읽기
 	Properties props = new Properties();

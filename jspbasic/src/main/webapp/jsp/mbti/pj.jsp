@@ -12,8 +12,8 @@
 	<input type="hidden" name="tf" value='<%=request.getParameter("tf")%>'> 
 		<p>I 와 E 중 하나를 선택하세요!</p>
 		<p>
-			<input type="radio" name="pj" value="p">P(인식) &nbsp;
-			<input type="radio" name="pj" value="j">J(판단) &nbsp;
+			<input type="radio" name="pj" value="P">P(인식) &nbsp;
+			<input type="radio" name="pj" value="J">J(판단) &nbsp;
 		</p>
 		<p><input type="submit" value="결과보기"></p>
 	</form>
