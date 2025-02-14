@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import jdbcboard.constant.ApplicationConstant;
 import jdbcboard.dao.MemberDAO;
 import jdbcboard.model.Member;
 import jdbcboard.util.ConnectionUtil;
@@ -24,7 +25,7 @@ public class MemberDAOImpl implements MemberDAO{
 	public MemberDAOImpl() {
 		try {
 			sqlProperties = new Properties();
-			sqlProperties.load(new FileReader("D:/embededk/jee_workspace/JDBCBoard/src/main/webapp/WEB-INF/props/sql.properties"));
+			sqlProperties.load(new FileReader(ApplicationConstant.SQL_PROPERTIES));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

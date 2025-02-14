@@ -27,18 +27,18 @@ public class ApplicationListener implements ServletContextListener{
 			sqlProperties.load(new FileReader(sce.getServletContext().getRealPath(sqlProp)));
 			commandProperties.load(new FileReader(sce.getServletContext().getRealPath(commandProp)));
 			
-			//점심먹고실습.. 
-			//3개의 Properties를 appProperties이라는 Properties로 합쳐서
-			//서블릿컨텍스트에 appProp속성변수에 저장하기
-			Properties appProperties = new Properties();
-			appProperties.putAll(databaseProperties); //properties는 <String, String>인 맵의 하위임
-			appProperties.putAll(sqlProperties);
-			appProperties.putAll(commandProperties);
-			sce.getServletContext().setAttribute("appProp", appProperties);
+//			//점심먹고실습.. 
+//			//3개의 Properties를 appProperties이라는 Properties로 합쳐서
+//			//서블릿컨텍스트에 appProp속성변수에 저장하기
+//			Properties appProperties = new Properties();
+//			appProperties.putAll(databaseProperties); //properties는 <String, String>인 맵의 하위임
+//			appProperties.putAll(sqlProperties);
+//			appProperties.putAll(commandProperties);
+//			sce.getServletContext().setAttribute("appProp", appProperties);
 			
-//			sce.getServletContext().setAttribute("databaseProperties", databaseProperties); //application내내 사용할거라 jsp영역 중 application에 담기
-//			sce.getServletContext().setAttribute("sqlProperties", sqlProperties);
-//			sce.getServletContext().setAttribute("commandProperties", commandProperties);
+			sce.getServletContext().setAttribute("databaseProperties", databaseProperties); //application내내 사용할거라 jsp영역 중 application에 담기
+			sce.getServletContext().setAttribute("sqlProperties", sqlProperties);
+			sce.getServletContext().setAttribute("commandProperties", commandProperties);
 		} catch(IOException ioe) {
 			ioe.printStackTrace();
 		}

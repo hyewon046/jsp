@@ -24,7 +24,7 @@ public class MemberServiceTest {
 		
 		
 		//get test
-		System.out.println(memberService.getMember("hong")); //아직 해결이안됨
+		System.out.println(memberService.getMember("hong"));
 //		
 //		//update test
 //		member = new Member("hong3", "홍동길", "홍군장", "1234", "hongS@hong.com", "010-1234-5678", "N");
