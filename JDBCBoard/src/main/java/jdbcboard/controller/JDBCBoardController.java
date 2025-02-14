@@ -9,11 +9,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jdbcboard.model.Member;
-import jdbcboard.service.MemberService;
 import jdbcboard.service.impl.ArticleServiceImpl;
 import jdbcboard.service.impl.BoardServiceImpl;
 import jdbcboard.service.impl.MemberServiceImpl;
-import jdbcboard.service.impl.ReplyServiceImpl;
 
 public class JDBCBoardController extends HttpServlet{
 	
