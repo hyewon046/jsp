@@ -20,7 +20,9 @@ public class BoardDAOImpl implements BoardDAO {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
-	public BoardDAOImpl() {
+	private static BoardDAOImpl boardDAOImpl = new BoardDAOImpl();
+	
+	private BoardDAOImpl() {
 		try {
 			sqlProperties = new Properties();
 			sqlProperties.load(new FileReader(ApplicationConstant.SQL_PROPERTIES));
@@ -28,6 +30,10 @@ public class BoardDAOImpl implements BoardDAO {
 			ex.printStackTrace();
 		}
 	
+	}
+	
+	public static BoardDAOImpl getBoardDAOImpl() {
+		return boardDAOImpl;
 	}
 	
 	@Override

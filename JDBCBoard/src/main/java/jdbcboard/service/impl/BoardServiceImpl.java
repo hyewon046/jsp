@@ -8,10 +8,15 @@ import jdbcboard.service.BoardService;
 
 public class BoardServiceImpl implements BoardService {
 	
+	private static BoardServiceImpl boardServiceImpl = new BoardServiceImpl();
 	private BoardDAOImpl boardDAOImpl;
 	
-	public BoardServiceImpl() {
-		boardDAOImpl = new BoardDAOImpl();
+	private BoardServiceImpl() {
+		boardDAOImpl = BoardDAOImpl.getBoardDAOImpl();
+	}
+	
+	public static BoardServiceImpl getBoardServiceImpl() {
+		return boardServiceImpl;
 	}
 	
 	@Override

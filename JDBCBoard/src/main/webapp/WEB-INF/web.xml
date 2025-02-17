@@ -32,11 +32,11 @@
   </filter-mapping>
   
   <servlet>
-  	<servlet-name>JDBCBoardController</servlet-name>
-  	<servlet-class>jdbcboard.controller.JDBCBoardController</servlet-class>
+  	<servlet-name>JDBCBoardController2</servlet-name>
+  	<servlet-class>jdbcboard.controller.JDBCBoardController2</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>JDBCBoardController</servlet-name>
+  	<servlet-name>JDBCBoardController2</servlet-name>
   	<url-pattern>*.do</url-pattern>
   </servlet-mapping>
   

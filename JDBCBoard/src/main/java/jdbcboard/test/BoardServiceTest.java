@@ -10,7 +10,7 @@ public class BoardServiceTest {
 	
 	public static void main(String[] args) {
 		
-		BoardService boardService = new BoardServiceImpl();
+		BoardService boardService = BoardServiceImpl.getBoardServiceImpl();
 		
 		//insert
 //		Board board = new Board(0, "유머게시판", 0);

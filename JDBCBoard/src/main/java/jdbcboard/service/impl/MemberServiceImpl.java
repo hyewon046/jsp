@@ -8,10 +8,17 @@ import jdbcboard.service.MemberService;
 
 public class MemberServiceImpl implements MemberService {
 	
+	private static MemberServiceImpl memberServiceImpl = new MemberServiceImpl();
 	private MemberDAOImpl memberDAOImpl;
 	
-	public MemberServiceImpl() {
-		memberDAOImpl = new MemberDAOImpl(); //DAOImpl을 가져와서 service와 dao 연결해주기
+	//controller에서 하나를 실행할때마다 계속 memberservice를 불러오는 것을 없애기위해 singleton패턴 사용
+	//DAOImpl과 ServiceImpl 변경
+	private MemberServiceImpl() {
+		memberDAOImpl = MemberDAOImpl.getMemberDAOImpl();
+	}
+	
+	public static MemberServiceImpl getMemberServiceImpl() {
+		return memberServiceImpl;
 	}
 	
 	@Override

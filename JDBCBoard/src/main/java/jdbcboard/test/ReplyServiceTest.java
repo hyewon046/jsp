@@ -11,7 +11,7 @@ public class ReplyServiceTest {
 	
 	public static void main(String[] args) {
 		
-		ReplyService replyService = new ReplyServiceImpl();
+		ReplyService replyService = ReplyServiceImpl.getReplyServiceImpl();
 		
 		//insert
 //		Reply reply = new Reply(0, "댓글3", null, "N", "hong", 1);

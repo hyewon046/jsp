@@ -22,7 +22,12 @@ public class MemberDAOImpl implements MemberDAO{
 	ResultSet rs = null;
 	List<Member> list = null;
 	
-	public MemberDAOImpl() {
+	//singleton패턴
+	//private static 객체 생성 - private 생성자 생성 - public static으로 가져갈 수있는거 하나 만들고 private 객체 리턴
+	
+	private static MemberDAOImpl memberDAOImpl = new MemberDAOImpl();
+	
+	private MemberDAOImpl() {
 		try {
 			sqlProperties = new Properties();
 			sqlProperties.load(new FileReader(ApplicationConstant.SQL_PROPERTIES));
@@ -30,6 +35,10 @@ public class MemberDAOImpl implements MemberDAO{
 			ex.printStackTrace();
 		}
 	
+	}
+	
+	public static MemberDAOImpl getMemberDAOImpl() {
+		return memberDAOImpl;
 	}
 			
 	@Override
@@ -130,10 +139,9 @@ public class MemberDAOImpl implements MemberDAO{
 			pstmt = conn.prepareStatement(sqlProperties.getProperty("UPDATE_MEMBER"));
 			pstmt.setString(1, member.getMname());
 			pstmt.setString(2, member.getMalias());
-			pstmt.setString(3, member.getMpass());
-			pstmt.setString(4, member.getMemail());
-			pstmt.setString(5, member.getMcp());
-			pstmt.setString(6, member.getMid());
+			pstmt.setString(3, member.getMemail());
+			pstmt.setString(4, member.getMcp());
+			pstmt.setString(5, member.getMid());
 			return pstmt.executeUpdate();
 		} catch (Exception ex) {
 			ex.printStackTrace();

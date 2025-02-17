@@ -15,12 +15,14 @@ import jdbcboard.util.ConnectionUtil;
 
 public class ReplyDAOImpl implements ReplyDAO {
 	
+	private static ReplyDAOImpl replyDAOImpl = new ReplyDAOImpl();
+	
 	Connection conn = null;
 	Properties sqlProperties = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
-	public ReplyDAOImpl() {
+	private ReplyDAOImpl() {
 		try {
 			sqlProperties = new Properties();
 			sqlProperties.load(new FileReader(ApplicationConstant.SQL_PROPERTIES));
@@ -30,6 +32,9 @@ public class ReplyDAOImpl implements ReplyDAO {
 	
 	}
 	
+	public static ReplyDAOImpl getReplyDAOImpl() {
+		return replyDAOImpl;
+	}
 	@Override
 	public List<Reply> selectReply() {
 		try {

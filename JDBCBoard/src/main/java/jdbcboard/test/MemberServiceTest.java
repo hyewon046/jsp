@@ -12,7 +12,7 @@ public class MemberServiceTest {
 		Member member = null;
 		int result = 0;
 		//insert test
-		MemberService memberService = new MemberServiceImpl();
+		MemberService memberService = MemberServiceImpl.getMemberServiceImpl();
 //		Member member = new Member("hong3", "홍길동", "홍장군", "1234", "hongZ@hong.com", "010-1234-5678", "N");
 //		int result = memberService.insertMember(member);
 //		if (result >0) {
@@ -24,10 +24,10 @@ public class MemberServiceTest {
 		
 		
 		//get test
-		System.out.println(memberService.getMember("hong"));
+//		System.out.println(memberService.getMember("hong"));
 //		
 //		//update test
-//		member = new Member("hong3", "홍동길", "홍군장", "1234", "hongS@hong.com", "010-1234-5678", "N");
+//		member = new Member("hong3", "홍동길", "홍군장", nulll, "hongS@hong.com", "010-1234-5678", "N");
 //		result = memberService.updateMember(member);
 //		if (result >0) {
 //			System.out.println("업뎃성공!");

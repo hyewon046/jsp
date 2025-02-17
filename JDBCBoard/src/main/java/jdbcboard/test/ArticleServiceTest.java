@@ -10,7 +10,7 @@ public class ArticleServiceTest {
 	
 	public static void main(String[] args) {
 		
-		ArticleService articleService = new ArticleServiceImpl();
+		ArticleService articleService = ArticleServiceImpl.getArticleServiceImpl();
 		
 		//insert
 //		Article article = new Article(0, "제목3", "내용3", 0, null, "N", 0, 0, 1, "hong");
@@ -27,7 +27,7 @@ public class ArticleServiceTest {
 //		}
 		
 		//delete
-//		int result = articleService.deleteArticle(3);
+//		int result = articleService.deleteArticle(22);
 //		if (result >0) {
 //			System.out.println("삭제 성공!");
 //		}
@@ -39,8 +39,8 @@ public class ArticleServiceTest {
 //		}
 		
 		//get
-		Article article = articleService.getArticle(2);
-		System.out.println(article);
+//		Article article = articleService.getArticle(2);
+//		System.out.println(article);
 		
 	}
 
