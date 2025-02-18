@@ -1,13 +1,18 @@
 package jdbcboard.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Serializable;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jdbcboard.model.Article;
 import jdbcboard.model.Board;
 import jdbcboard.model.Member;
@@ -46,8 +51,15 @@ public class JDBCBoardController2 extends HttpServlet implements Serializable {
       Article article = null;
       Reply reply = null;
       
+		System.out.println(requestURI);
+		System.out.println(viewPage);
+      
       switch (requestURI) {
       
+      	 case "index.do" :
+	    	  forward(request, response, viewPage);
+	    	  break;
+    	  
          case "selectMember.do":
             resultObj = MemberServiceImpl.getMemberServiceImpl().selectMember();
             request.setAttribute("memberList", resultObj);
@@ -103,6 +115,26 @@ public class JDBCBoardController2 extends HttpServlet implements Serializable {
             response.sendRedirect("/selectMember.do");
             break;
             
+         case "login.do" : 
+        	 boolean loginResult = MemberServiceImpl.getMemberServiceImpl().checkLogin(
+        			request.getParameter("mid"),
+        			request.getParameter("mpass")
+        	);
+        	 if (loginResult) {
+        		 request.getSession().setAttribute("ss_mid", request.getParameter("mid"));
+        		 request.setAttribute("loginResult", true);
+        	 }else {
+        		 request.setAttribute("loginResult", false);
+        	 }
+        	 response.sendRedirect("/index.jsp"); //데이터가져올것없으니까 포워드 안해도됨
+        	 break;
+        	 
+         case "logout.do" : 
+        	 HttpSession hs = request.getSession();
+        	 if (hs != null) hs.invalidate(); 
+        	 forward(request, response, viewPage);
+        	 break;
+            
          case "selectBoard.do":
             resultObj = BoardServiceImpl.getBoardServiceImpl().selectBoard();
             request.setAttribute("boardList", resultObj);
@@ -119,6 +151,12 @@ public class JDBCBoardController2 extends HttpServlet implements Serializable {
             response.sendRedirect("/selectBoard.do");
             forward(request, response, viewPage);
             break;
+
+         case "getBoard.do":
+             resultObj = BoardServiceImpl.getBoardServiceImpl().getBoard(Integer.parseInt(request.getParameter("bid")));
+             request.setAttribute("board", resultObj);
+             forward(request, response, viewPage);
+             break;
             
          case "updateBoardForm.do":
             int bid = Integer.parseInt(request.getParameter("bid"));
@@ -156,7 +194,10 @@ public class JDBCBoardController2 extends HttpServlet implements Serializable {
             request.setAttribute("article", resultObj);
             forward(request, response, viewPage);
             break;
-            
+           
+         case "insertArticleForm.do":
+             response.sendRedirect(viewPage);
+             break; 
          case "insertArticle.do":
             article = new Article(
                   0,
@@ -183,7 +224,7 @@ public class JDBCBoardController2 extends HttpServlet implements Serializable {
             
          case "updateArticle.do":
             article = new Article(
-                  0,
+            		Integer.parseInt(request.getParameter("aid")),
                   request.getParameter("asubject"),
                   request.getParameter("acontent"),
                   0,
@@ -209,7 +250,12 @@ public class JDBCBoardController2 extends HttpServlet implements Serializable {
             
          case "selectReply.do":
             resultObj = ReplyServiceImpl.getReplyServiceImpl().selectReply();
-            request.setAttribute("resultObj", resultObj);
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            String jsonStr = gson.toJson(resultObj);
+            response.setContentType("application/json");
+            PrintWriter pw = response.getWriter();
+            pw.write(jsonStr);
+            pw.flush();
             break;
             
          case "insertReply.do":
@@ -226,8 +272,7 @@ public class JDBCBoardController2 extends HttpServlet implements Serializable {
             break;
             
          case "deleteReply.do":
-            result = ReplyServiceImpl.getReplyServiceImpl().deleteReply(Integer.parseInt("rid"));
-            request.setAttribute("result", result);
+            ReplyServiceImpl.getReplyServiceImpl().deleteReply(Integer.parseInt(request.getParameter("rid")));
             break;
             
       }

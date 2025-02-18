@@ -14,11 +14,11 @@ public class ReplyServiceTest {
 		ReplyService replyService = ReplyServiceImpl.getReplyServiceImpl();
 		
 		//insert
-//		Reply reply = new Reply(0, "댓글3", null, "N", "hong", 1);
-//		int result = replyService.insertReply(reply);
-//		if (result >0) {
-//			System.out.println("등록 성공!");
-//		}
+		Reply reply = new Reply(0, "댓굴", null, "N", "hong", 1);
+		int result = replyService.insertReply(reply);
+		if (result >0) {
+			System.out.println("등록 성공!");
+		}
 		
 		//update
 //		Reply reply = new Reply(2, "수정 댓글2", null, "N", "hong2", 2);
@@ -40,8 +40,8 @@ public class ReplyServiceTest {
 //		}
 		
 		//get
-		Reply reply = replyService.getReply(2);
-		System.out.println(reply);
+//		Reply reply = replyService.getReply(2);
+//		System.out.println(reply);
 	
 	
 	

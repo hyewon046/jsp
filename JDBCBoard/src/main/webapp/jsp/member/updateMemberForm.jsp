@@ -6,6 +6,7 @@
 <title>회원수정폼</title>
 </head>
 <body>
+<%@ include file="/jsp/include/header.jsp" %>
 <h3>회원수정</h3>
 <form action="/updateMember.do" method="post">
 <input type="hidden" name="mid" value="${member.mid}">

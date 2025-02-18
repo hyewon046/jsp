@@ -6,6 +6,7 @@
 <title>회원가입폼</title>
 </head>
 <body>
+<%@ include file="/jsp/include/header.jsp" %>
 <h3>회원가입</h3>
 <form action="/insertMember.do" method="post">
 아이디 : <input type="text" name="mid"><br>

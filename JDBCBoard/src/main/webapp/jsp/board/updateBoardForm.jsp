@@ -6,6 +6,7 @@
 <title>게시판수정폼</title>
 </head>
 <body>
+<%@ include file="/jsp/include/header.jsp" %>
 <h3>게시판 수정</h3>
 <form action="/updateBoard.do" method="post">
 <input type="hidden" name="bid" value="${board.bid}">

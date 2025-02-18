@@ -6,6 +6,7 @@
 <title>게시판추가</title>
 </head>
 <body>
+<%@ include file="/jsp/include/header.jsp" %>
 <h3>게시판 추가</h3>
 <form action="/insertBoard.do" method="post">
 	게시판명 : <input type="text" name="bname"><br><br>

@@ -9,6 +9,7 @@
 <title>게시판 목록</title>
 </head>
 <body>
+<%@ include file="/jsp/include/header.jsp" %>
 <h3>게시판 목록</h3>
 <table>
 	<thead>

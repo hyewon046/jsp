@@ -174,5 +174,28 @@ public class MemberDAOImpl implements MemberDAO{
 		}
 	}
 	
+	@Override
+	public boolean checkLogin(String mid, String mpass) {
+		String getSQL = sqlProperties.getProperty("CHECKLOGIN_MEMBER");
+		try {
+			conn = ConnectionUtil.getConnectionUtil().getConnection();
+			pstmt = conn.prepareStatement(getSQL);
+			pstmt.setString(1, mid);
+			pstmt.setString(2, mpass);
+			rs = pstmt.executeQuery();
+			if (rs.next() && rs.getInt("cnt") > 0)  return true;
+			else return false;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
+		} finally {
+			try {
+				ConnectionUtil.getConnectionUtil().closeConnection(rs, pstmt, conn);
+			}catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+	
 	
 }

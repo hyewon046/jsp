@@ -45,5 +45,10 @@ public class MemberServiceImpl implements MemberService {
 	public int deleteMember(String mid) {
 		return memberDAOImpl.deleteMember(mid);
 	}
+	
+	@Override
+	public boolean checkLogin(String mid, String mpass) {
+		return memberDAOImpl.checkLogin(mid, mpass);
+	}
 
 }
