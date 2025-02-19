@@ -37,10 +37,31 @@ public class ArticleDAOImpl implements ArticleDAO {
 	}
 	
 	@Override
-	public List<Article> selectArticle() {
+	public List<Article> selectArticle(String searchBoard, String searchClass, String searchVal) {
 		try {
-			conn = ConnectionUtil.getConnectionUtil().getConnection();
+			//SELECT * FROM ARTICLE WHERE ADELYN='N'
 			String sql = sqlProperties.getProperty("SELECT_ARTICLE");
+			
+			if(searchBoard!=null && !searchBoard.equals("")) {
+				sql += " AND A.BID=" + searchBoard + " ";
+			}
+			if (searchClass != null ) {
+				if (searchClass.equals("")) {
+					sql += " AND (ASUBJECT LIKE '%" + searchVal + "%' OR";
+					sql += " ACONTENT LIKE '%" + searchVal + "%' OR";
+					sql += " MID LIKE '%" + searchVal +"%') ";
+				} else if (searchClass.equals("asubject")) {
+					sql += " AND ASUBJECT LIKE '%" + searchVal + "%' ";
+				} else if (searchClass.equals("acontent")) {
+					sql += " AND ACONTENT LIKE '%" + searchVal + "%' ";
+				} else if (searchClass.equals("mid")) {
+					sql += " AND MID LIKE '%" + searchVal + "%' ";
+				}
+			}
+			
+			sql += " ORDER BY AID DESC ";
+			System.out.println(sql);
+			conn = ConnectionUtil.getConnectionUtil().getConnection();
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			List<Article> articleList = new ArrayList<Article>();
@@ -56,6 +77,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 				article.setArcnt(rs.getInt("arcnt"));
 				article.setBid(rs.getInt("bid"));
 				article.setMid(rs.getString("mid"));
+				article.setBname(rs.getString("bname"));
 				articleList.add(article);
 			}
 			return articleList;
@@ -92,6 +114,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 				article.setArcnt(rs.getInt("arcnt"));
 				article.setBid(rs.getInt("bid"));
 				article.setMid(rs.getString("mid"));
+				article.setBname(rs.getString("bname"));
 			}
 			return article;
 		} catch (Exception ex) {

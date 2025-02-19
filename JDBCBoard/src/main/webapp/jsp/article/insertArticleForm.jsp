@@ -13,8 +13,8 @@
 	게시판 번호 : <input type="text" name="bid"><br>
 	회원아이디 : <input type="text" name="mid"><br>
 	 -->
-	 <input type="hidden" name="bid" value="1">
-	 <input type="hidden" name="mid" value="hong">
+	 <input type="hidden" name="mid" value="${sessionScope.ss_mid}">
+	게시판 번호 : <input type="text" name="bid"><br>
 	제목 : <input type="text" name="asubject"><br>
 	내용 : <textarea rows="10" cols="40" name="acontent"></textarea><br>
 	<input type="submit" value="등록">&nbsp;

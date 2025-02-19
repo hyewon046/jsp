@@ -13,11 +13,16 @@
 <script defer src="../js/board.js"></script>
 </head>
 <body>
+<%@ include file="/jsp/include/header.jsp" %>
 <h3>게시글 조회</h3>
 <table>
 	<tr>
 		<td>아이디</td>
 		<td>${article.aid}</td>	
+	</tr>
+	<tr>
+		<td>게시판</td>
+		<td>${article.bname}</td>	
 	</tr>
 	<tr>
 		<td>제목</td>
@@ -44,16 +49,25 @@
 		<td>${article.aafcnt}</td>	
 	</tr>
 </table>
+<c:if test="${!empty sessionScope.ss_mid}">
+<p>
+		<input type="text" name="rcontent">&nbsp;
+		<input id="insertReplyBtn" type="button" value="등록" 
+			data-mid="${sessionScope.ss_mid}"  data-aid="${article.aid}">
+</p>
+</c:if>
 <ul id="replyList">
 </ul>
 <p>
+	<c:if test="${sessionScope.ss_mid == article.mid}">
 	<input type="button" value="수정" onclick="location.href='/updateArticleForm.do?aid=${article.aid}';">&nbsp;
 	<input type="button" value="삭제" onclick="location.href='/deleteArticle.do?aid=${article.aid}';">&nbsp;
+	</c:if>
 	<input type="button" value="목록" onclick="location.href='/selectArticle.do';">
 </p>
 <script>
 $(function() {
-	board.getReplyList('${article.aid}');
+	board.getReplyList('${article.aid}','${sessionScope.ss_mid}');
 });
 </script>	
 </body>

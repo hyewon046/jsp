@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판 목록</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script defer src="../js/board.js"></script>
 </head>
 <body>
 <%@ include file="/jsp/include/header.jsp" %>
@@ -36,6 +38,7 @@
 	</tbody>
 	</c:if>
 </table>
-	<p><input type="button" value="등록" onclick="location.href='/insertBoardForm.do';"></p>
+	<p><input id="insertBtn" type="button" value="등록" 
+	data-mid="${sessionScope.ss_mid}" data-location="/insertBoardForm.do"></p>
 </body>
 </html>

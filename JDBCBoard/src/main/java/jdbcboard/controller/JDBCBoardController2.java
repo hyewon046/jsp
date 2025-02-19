@@ -1,7 +1,10 @@
 package jdbcboard.controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.io.Reader;
 import java.io.Serializable;
 
 import com.google.gson.Gson;
@@ -51,6 +54,10 @@ public class JDBCBoardController2 extends HttpServlet implements Serializable {
       Article article = null;
       Reply reply = null;
       
+      Gson gson = new GsonBuilder().create();
+      String jsonStr = null;
+      PrintWriter pw=null;
+      
 		System.out.println(requestURI);
 		System.out.println(viewPage);
       
@@ -77,6 +84,7 @@ public class JDBCBoardController2 extends HttpServlet implements Serializable {
             break;
             
          case "insertMember.do":
+        	 System.out.println(request.getParameter("mid"));
             member = new Member(
                request.getParameter("mid"),
                request.getParameter("mname"),
@@ -141,6 +149,15 @@ public class JDBCBoardController2 extends HttpServlet implements Serializable {
             forward(request, response, viewPage);
             break;
             
+         case "selectBoardJson.do":
+        	 resultObj = BoardServiceImpl.getBoardServiceImpl().selectBoard();
+             jsonStr = gson.toJson(resultObj);
+             response.setContentType("application/json");
+             pw = response.getWriter();
+             pw.write(jsonStr);
+             pw.flush();
+             break;
+            
          case "insertBoardForm.do":
             response.sendRedirect(viewPage);
             break;            
@@ -183,8 +200,16 @@ public class JDBCBoardController2 extends HttpServlet implements Serializable {
             break;
             
          case "selectArticle.do":
-            resultObj = ArticleServiceImpl.getArticleServiceImpl().selectArticle();
+        	 String searchBoard = request.getParameter("searchBoard");
+        	 String searchClass = request.getParameter("searchClass");
+        	 String searchVal = request.getParameter("searchVal");
+            resultObj = ArticleServiceImpl.getArticleServiceImpl().selectArticle(
+            		searchBoard, searchClass, searchVal
+            );
             request.setAttribute("articleList", resultObj);
+            request.setAttribute("searchBoard", searchBoard);
+            request.setAttribute("searchClass", searchClass);
+            request.setAttribute("searchVal", searchVal);
             forward(request, response, viewPage);
             break;
             
@@ -209,7 +234,8 @@ public class JDBCBoardController2 extends HttpServlet implements Serializable {
                   0,
                   0,
                   Integer.parseInt(request.getParameter("bid")),
-                  request.getParameter("mid")
+                  request.getParameter("mid"),
+                  null
             );
             result = ArticleServiceImpl.getArticleServiceImpl().insertArticle(article);
             request.setAttribute("result", result);
@@ -233,6 +259,7 @@ public class JDBCBoardController2 extends HttpServlet implements Serializable {
                   0,
                   0,
                   0,
+                  null,
                   null
             );
             result = ArticleServiceImpl.getArticleServiceImpl().updateArticle(article);
@@ -250,25 +277,26 @@ public class JDBCBoardController2 extends HttpServlet implements Serializable {
             
          case "selectReply.do":
             resultObj = ReplyServiceImpl.getReplyServiceImpl().selectReply();
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            String jsonStr = gson.toJson(resultObj);
+            jsonStr = gson.toJson(resultObj);
             response.setContentType("application/json");
-            PrintWriter pw = response.getWriter();
+            pw = response.getWriter();
             pw.write(jsonStr);
             pw.flush();
             break;
             
          case "insertReply.do":
+        	 BufferedReader reader = new BufferedReader(
+        			 new InputStreamReader(request.getInputStream()));
+        	 reply = gson.fromJson(reader.readLine(), Reply.class);
             reply = new Reply(
                0,
-               request.getParameter("rcontent"),
+               reply.getRcontent(),
                null,
                "N",
-               request.getParameter("mid"),
-               Integer.parseInt(request.getParameter("aid"))
+               reply.getMid(),
+               reply.getAid()
             );
-            result = ReplyServiceImpl.getReplyServiceImpl().insertReply(reply);
-            request.setAttribute("result", result);
+            ReplyServiceImpl.getReplyServiceImpl().insertReply(reply);
             break;
             
          case "deleteReply.do":

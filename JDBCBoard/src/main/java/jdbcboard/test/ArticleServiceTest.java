@@ -13,8 +13,10 @@ public class ArticleServiceTest {
 		ArticleService articleService = ArticleServiceImpl.getArticleServiceImpl();
 		
 		//insert
-//		Article article = new Article(0, "제목3", "내용3", 0, null, "N", 0, 0, 1, "hong");
-//		int result = articleService.insertArticle(article);
+		for (int i=1; i<101; i++) {
+			Article article = new Article(0, "새제목"+i, "새내용"+i, 0, null, "N", 0, 0, 3, "6",null);
+			int result = articleService.insertArticle(article);
+		}
 //		if (result >0) {
 //			System.out.println("등록 성공!");
 //		}
