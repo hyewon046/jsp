@@ -42,22 +42,26 @@ const board = {
 			}
 		);
 	},
-	getBoardList : function() {
+	getBoardList: function(bid) {
 		axios.get('/selectBoardJson.do').then(
 			response => {
-				this.printBoardList(response.data);
+				this.printBoardList(response.data, bid);			
 			}
-		);
+		);		
 	},
-	printBoardList: function(data) {
-		if(data) {
-			let selectHtml='';
+	printBoardList: function(data, bid) {
+		if (data) {
+			let selectHtml = '';
+			let selected = '';
 			for (brd of data) {
-				selectHtml += `<option value='${brd.bid}'>${brd.bname}</option>`;
+				if (`${brd.bid}`==bid) {
+					selected = "selected";
+				} else {
+					selected = "";
+				}
+				selectHtml += `<option value='${brd.bid}' ${selected}>${brd.bname}</option>`;
 			}
-			$("select[name='searchBoard']").html(
-				"<option value=''>전체</option>" + selectHtml
-			);
+			$("select[name='bid']").append(selectHtml);
 		}
 	}
 };

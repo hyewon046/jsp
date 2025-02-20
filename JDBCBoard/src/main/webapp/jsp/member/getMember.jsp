@@ -1,16 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<title>회원 정보</title>
-</head>
-<body>
+<%@ include file="/jsp/include/header.jsp" %>
 <h3>회원 정보</h3>
-<table>
+<table class="table table-striped">
 	<tr>
 		<td>아이디</td>
 		<td>${member.mid}</td>	
@@ -36,7 +28,6 @@
 		<td>${member.mdelyn}</td>	
 	</tr>
 </table>
-<p><input type="button" value="목록" onclick="location.href='/selectMember.do';"></p>
+<p><input type="button" value="목록" onclick="location.href='/selectMember.do';" class="btn btn-info"></p>
 </form>
-</body>
-</html>
+<%@ include file="/jsp/include/footer.jsp" %>

@@ -20,6 +20,7 @@ import jdbcboard.model.Article;
 import jdbcboard.model.Board;
 import jdbcboard.model.Member;
 import jdbcboard.model.Reply;
+import jdbcboard.service.ArticleService;
 import jdbcboard.service.impl.ArticleServiceImpl;
 import jdbcboard.service.impl.BoardServiceImpl;
 import jdbcboard.service.impl.MemberServiceImpl;
@@ -64,7 +65,7 @@ public class JDBCBoardController2 extends HttpServlet implements Serializable {
       switch (requestURI) {
       
       	 case "index.do" :
-	    	  forward(request, response, viewPage);
+	    	  response.sendRedirect("/selectArticle.do");
 	    	  break;
     	  
          case "selectMember.do":
@@ -134,13 +135,13 @@ public class JDBCBoardController2 extends HttpServlet implements Serializable {
         	 }else {
         		 request.setAttribute("loginResult", false);
         	 }
-        	 response.sendRedirect("/index.jsp"); //데이터가져올것없으니까 포워드 안해도됨
+        	 response.sendRedirect("/selectArticle.do"); //데이터가져올것없으니까 포워드 안해도됨
         	 break;
         	 
          case "logout.do" : 
         	 HttpSession hs = request.getSession();
         	 if (hs != null) hs.invalidate(); 
-        	 forward(request, response, viewPage);
+        	response.sendRedirect("/selectArticle.do");
         	 break;
             
          case "selectBoard.do":
@@ -214,11 +215,13 @@ public class JDBCBoardController2 extends HttpServlet implements Serializable {
             break;
             
          case "getArticle.do":
-            int aid = Integer.parseInt(request.getParameter("aid"));
-            resultObj = ArticleServiceImpl.getArticleServiceImpl().getArticle(aid);
-            request.setAttribute("article", resultObj);
-            forward(request, response, viewPage);
-            break;
+        	 int aid = Integer.parseInt(request.getParameter("aid"));
+        	 ArticleService as =ArticleServiceImpl.getArticleServiceImpl();
+        	 as.increaseAvcnt(aid);
+             resultObj = as.getArticle(aid);
+             request.setAttribute("article", resultObj);
+             forward(request, response, viewPage);
+             break;
            
          case "insertArticleForm.do":
              response.sendRedirect(viewPage);

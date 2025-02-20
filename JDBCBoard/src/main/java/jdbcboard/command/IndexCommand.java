@@ -7,7 +7,7 @@ public class IndexCommand implements Command {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) {
-		return  "/index.jsp";
+		return  "";
 	}
 
 }

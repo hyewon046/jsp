@@ -17,6 +17,7 @@ import jdbcboard.service.impl.MemberServiceImpl;
 import jdbcboard.service.impl.ReplyServiceImpl;
 
 public class JDBCBoardController extends HttpServlet{
+	//파라미터들 나중에 바꿔서 이 파일은 전버전이라 안바뀌어서 에러남
 	
 	//컨트롤러의 역할
 	//1. 요청을 받아 서비스를 호출

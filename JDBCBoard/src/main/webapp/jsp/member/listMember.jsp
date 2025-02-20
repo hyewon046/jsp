@@ -1,19 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<title>회원 목록</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script defer src="../js/board.js"></script>
-</head>
-<body>
 <%@ include file="/jsp/include/header.jsp" %>
 <h3>회원 목록</h3>
-<table>
+<table class="table table-hover">
 	<thead>
 		<tr>
 			<th>아이디</th>
@@ -36,15 +25,14 @@
 			<td>${member.mcp}</td>
 			<td>${member.mdelyn}</td>
 			<td>
-				<input type="button" value="수정" onclick="location.href='/updateMemberForm.do?mid=${member.mid}';">&nbsp;
-				<input type="button" value="삭제" onclick="location.href='/deleteMember.do?mid=${member.mid}';">&nbsp;
+				<input type="button" value="수정" onclick="location.href='/updateMemberForm.do?mid=${member.mid}';" class="btn btn-secondary btn-sm">&nbsp;
+				<input type="button" value="삭제" onclick="location.href='/deleteMember.do?mid=${member.mid}';" class="btn btn-secondary btn-sm">&nbsp;
 			</td>
 		</tr>
 		</c:forEach>
 	</tbody>
 	</c:if>
 </table>
-	<p><input id="insertBtn" type="button" value="등록" 
-	data-mid="${sessionScope.ss_mid}" data-location="/insertMemberForm.do"></p>
-</body>
-</html>
+	<p id="insertP"><input id="insertBtn" type="button" value="등록" 
+	data-mid="${sessionScope.ss_mid}" data-location="/insertMemberForm.do" class="btn btn-success"></p>
+<%@ include file="/jsp/include/footer.jsp" %>

@@ -1,11 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<title>회원가입폼</title>
-</head>
-<body>
+
 <%@ include file="/jsp/include/header.jsp" %>
 <h3>회원가입</h3>
 <form action="/insertMember.do" method="post">
@@ -18,5 +12,4 @@
 <input type="button" value="목록" onclick="location.href='/selectMember.do';">&nbsp;
 <input type="submit" value="등록">
 </form>
-</body>
-</html>
+<%@ include file="/jsp/include/footer.jsp" %>

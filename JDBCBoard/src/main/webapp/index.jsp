@@ -14,5 +14,3 @@
 <%
 	//out.print(ConnectionUtil.getConnectionUtil().getConnection()); //connection은 static이 아니라서 실행할때마다 값이 달라짐
 %>
-
-<c:redirect url="/selectArticle.do"/>
